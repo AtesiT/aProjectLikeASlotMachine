@@ -10,13 +10,32 @@
 const prompt = require('prompt-sync')();
 
 const deposit = () => {
-    const deposit = prompt('Сколько вы возьмёте денег в игру? ')
-    const numberDepositAmount = parseFloat(depositAmount);
+    while (true) {
+        const depositAmount = prompt('Сколько вы возьмёте денег в игру? ')
+        const numberDepositAmount = parseFloat(depositAmount);
 
-    if(isNaN(numberDepositAmount) || numberDepositAmount <= 0) {
-        console.log('Вы ввели неправильную сумму денег или ошиблись в написании')
+        if(isNaN(numberDepositAmount) || numberDepositAmount <= 0) {
+            console.log('Вы ввели неправильную сумму денег или ошиблись в написании')
+        } else {
+            return numberDepositAmount;
+        }
     }
 };
 
+const getNumbersOfLines = () => {
+    while (true) {
+        const lines = prompt('На сколько линий ставите (1-3)? ')
+        const numberOfLines = parseFloat(lines);
 
-deposit();
+        if(isNaN(numberOfLines) || numberOfLines <= 0 || numberOfLines > 3) {
+            console.log('Вы ввели неправильное число линий')
+        } else {
+            return numberOfLines;
+        }
+    }
+}
+
+
+
+let balance = deposit();
+const numberOfLines = getNumbersOfLines();
