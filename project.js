@@ -9,6 +9,23 @@
 
 const prompt = require('prompt-sync')();
 
+const ROWS = 3;
+const COLS = 3;
+
+const SYMBOLS_COUNT = {
+    A: 2,
+    B: 4,
+    C: 6,
+    D: 8,
+}
+
+const SYMBOL_VALUES = {
+    A: 5,
+    B: 4,
+    C: 3,
+    D: 2,
+}
+
 const deposit = () => {
     while (true) {
         const depositAmount = prompt('Сколько вы возьмёте денег в игру? ')
@@ -35,12 +52,12 @@ const getNumbersOfLines = () => {
     }
 }
 
-const getBet = (balance) => {
+const getBet = (balance, lines) => {
     while (true) {
-        const bet = prompt('Какую ставку ставите? ')
+        const bet = prompt('Какую ставку ставите на одну из линий? ')
         const numberBet = parseFloat(bet);
 
-        if(isNaN(numberBet) || numberBet <= 0 || numberBet > balance) {
+        if(isNaN(numberBet) || numberBet <= 0 || numberBet > balance / lines) {
             console.log('Вы ввели неправильную ставку')
         } else {
             return numberBet;
@@ -48,7 +65,16 @@ const getBet = (balance) => {
     }
 }
 
+const spin = () => {
+    const symbols = [];
+    for (const [symbols, count] of Object.entries(SYMBOLS_COUNT)) {
+        for (let i = 0; i < count; i++) {
+            symbols.push(symbol);
+        }
+    }
+}
+
 let balance = deposit();
 const numberOfLines = getNumbersOfLines();
-const bet = getBet(balance);
+const bet = getBet(balance, numberOfLines);
 
