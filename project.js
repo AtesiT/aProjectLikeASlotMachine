@@ -35,7 +35,20 @@ const getNumbersOfLines = () => {
     }
 }
 
+const getBet = (balance) => {
+    while (true) {
+        const bet = prompt('Какую ставку ставите? ')
+        const numberBet = parseFloat(bet);
 
+        if(isNaN(numberBet) || numberBet <= 0 || numberBet > balance) {
+            console.log('Вы ввели неправильную ставку')
+        } else {
+            return numberBet;
+        }
+    }
+}
 
 let balance = deposit();
 const numberOfLines = getNumbersOfLines();
+const bet = getBet(balance);
+
